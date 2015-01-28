@@ -1,0 +1,1 @@
+The SparkFun_LED_8x7 folder contains a library and example sketches for Arduino.
