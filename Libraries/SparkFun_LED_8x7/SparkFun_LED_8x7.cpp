@@ -12,3 +12,18 @@
 #include <Arduino.h>
 
 #include "SparkFun_LED_8x7.h"
+
+SparkFun_LED_8x7::SparkFun_LED_8x7()
+{
+
+}
+
+SparkFun_LED_8x7::~SparkFun_LED_8x7()
+{
+
+}
+
+bool SparkFun_LED_8x7::init(byte pins[static CHAPLEX_PINS])
+{
+    return true;
+|

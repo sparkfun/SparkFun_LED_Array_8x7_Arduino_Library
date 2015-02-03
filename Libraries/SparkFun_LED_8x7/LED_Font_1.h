@@ -26,8 +26,8 @@ char char_I[] PROGMEM = { 3, 0x41, 0x7F, 0x41 };
 
 /* Pointers to characters */
 PGM_P char_table[] = {  char_A, char_B, char_C, char_D, char_E, char_F, char_G,
-                        char_H, char_I, char_J, char_K, char_L, char_M, char_N,
+                        char_H, char_I, };/*char_J, char_K, char_L, char_M, char_N,
                         char_O, char_P, char_Q, char_R, char_S, char_T, char_U,
-                        char_V, char_W, char_X, char_Y, char_Z };
+                        char_V, char_W, char_X, char_Y, char_Z };*/
 
 #endif // LED_Font_1_H
