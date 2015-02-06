@@ -56,7 +56,7 @@ void setup() {
   Serial.println(F("------------------------------"));
   
   // Initialize LED array
-  //plex.init(led_pins);
+  plex.init(led_pins);
 }
 
 void loop() {
