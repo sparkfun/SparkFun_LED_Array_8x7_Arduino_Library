@@ -23,7 +23,7 @@ SparkFun_LED_8x7::~SparkFun_LED_8x7()
 
 }
 
-bool SparkFun_LED_8x7::init(byte pins[static CHAPLEX_PINS])
+bool SparkFun_LED_8x7::init(byte pins[CHAPLEX_PINS])
 {
     return true;
-|
+}

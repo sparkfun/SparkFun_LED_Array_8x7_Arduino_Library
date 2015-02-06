@@ -11,7 +11,7 @@
  */
  
 #ifndef LED_Font_1_H
-#define LED_Fonr_1_H
+#define LED_Font_1_H
 
 /* Format: { size in bytes of char, byte 1, byte 2, ... } */
 char char_A[] PROGMEM = { 4, 0x7E, 0x11, 0x11, 0x7E };
