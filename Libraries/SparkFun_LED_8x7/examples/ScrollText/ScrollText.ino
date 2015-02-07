@@ -43,8 +43,8 @@ Distributed as-is; no warranty is given.
 #include <Chaplex.h>
 
 // Global variables
-SparkFun_LED_8x7 plex = SparkFun_LED_8x7();
-static byte led_pins[] = {2,3,4,5,6,7,8,9}; // Pins for LEDs
+//SparkFun_LED_8x7 plex = SparkFun_LED_8x7();
+static byte led_pins[] = {2,3,4,5,6,7,8, 9}; // Pins for LEDs
 
 void setup() {
 
@@ -57,6 +57,9 @@ void setup() {
   
   // Initialize LED array
   plex.init(led_pins);
+  
+  // Scroll some text
+  plex.scrollText("B");
 }
 
 void loop() {

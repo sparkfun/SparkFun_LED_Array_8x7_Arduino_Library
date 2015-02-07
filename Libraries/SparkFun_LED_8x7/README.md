@@ -11,6 +11,8 @@ Version
 Known Issues
 ------------
 
+* Timer 2 is used to control the LED refresh. You will not be able to use Timer 2 for other functions.
+
 Getting Started
 ---------------
 
