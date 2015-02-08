@@ -9,6 +9,8 @@
  * This library controls the 8x7 Charlieplex LED array. Note that Timer2 is used
  * in this library to control the LED refresh. You will not be able to use it
  * for other uses.
+ *
+ * Relies on the Chaplex library written by Stefan Götze.
  */
  
 #ifndef SparkFun_LED_8x7_H
@@ -16,15 +18,17 @@
 
 #include <Arduino.h>
 
-#include "Chaplex.h"
+#include <Chaplex.h>
 #include "LED_Font_1.h"
 
 /* Debug */
-#define LED_8X7_DEBUG   1
+#define LED_8X7_DEBUG   0
 
 /* Constants */
 #define NUM_CHAPLEX_PINS    8       // Number of pins   
 #define TIMER2_TCNT         248     // Refresh: (256-248)*(1024)/(4 MHz)=2.05 ms
+#define DEFAULT_SHIFT_DELAY 50      // Number of ticks to wait before scrolling
+#define MAX_CHARS           100     // Maximum characters to scroll
 #define CHAR_OFFSET         0x41    // Starting place for ASCII characters
 #define CHAR_SPACE          2       // Number of blank columns between chars
 #define END_SPACE           6       // Number of blank columns after text
@@ -81,6 +85,11 @@ public:
      * @return True if array configured. False on error.
      */
     bool init(byte pins[NUM_CHAPLEX_PINS]);
+    
+    /**
+     * @brief Clears the Charlieplex array.
+     */
+    void clear();
     
     /**
      * @brief Sets text to scroll across the LED array
