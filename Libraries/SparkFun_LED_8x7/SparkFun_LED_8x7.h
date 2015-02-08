@@ -29,16 +29,16 @@
 #define TIMER2_TCNT         248     // Refresh: (256-248)*(1024)/(4 MHz)=2.05 ms
 #define DEFAULT_SHIFT_DELAY 50      // Number of ticks to wait before scrolling
 #define MAX_CHARS           100     // Maximum characters to scroll
-#define CHAR_OFFSET         0x41    // Starting place for ASCII characters
-#define CHAR_SPACE          2       // Number of blank columns between chars
-#define END_SPACE           6       // Number of blank columns after text
+#define CHAR_OFFSET         0x20    // Starting place for ASCII characters
+#define CHAR_SPACE          1       // Number of blank columns between chars
+#define END_SPACE           8       // Number of blank columns after text
 #define COL_SIZE            7       // Number of LEDs in a single column
 #define ROW_SIZE            8       // Number of LEDs in a single row
 #define NUM_LEDS            COL_SIZE * ROW_SIZE
 #define ALL_BUT_LAST_COL    NUM_LEDS - COL_SIZE
 
 /* Global variables */
-static charlieLed g_leds[56] = {{0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {0,6}, {0,7},   
+const charlieLed g_leds[56] = {{0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {0,6}, {0,7},   
                                 {1,0}, {1,2}, {1,3}, {1,4}, {1,5}, {1,6}, {1,7},
                                 {2,0}, {2,1}, {2,3}, {2,4}, {2,5}, {2,6}, {2,7},
                                 {3,0}, {3,1}, {3,2}, {3,4}, {3,5}, {3,6}, {3,7},
@@ -125,6 +125,6 @@ private:
 
 };
 
-extern SparkFun_LED_8x7 plex;
+extern SparkFun_LED_8x7 Plex;
 
 #endif // SparkFun_LED_8x7_H

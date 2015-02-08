@@ -57,7 +57,7 @@ void setup() {
   Serial.println(F("------------------------------"));
   
   // Initialize LED array
-  plex.init(led_pins);
+  Plex.init(led_pins);
 }
 
 void loop() {
@@ -66,8 +66,8 @@ void loop() {
   Serial.println(freeMemory());
   
   // Scroll some text then stop
-  plex.scrollText("ABCDEABCDEABCDEABCDEABCDEABCDE");
-  delay(10000);
-  plex.stopScrolling();
+  Plex.scrollText("Let's test some scrollz!");
+  delay(20000);
+  Plex.stopScrolling();
   delay(2000);
 }

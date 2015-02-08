@@ -18,7 +18,7 @@
 #include "SparkFun_LED_8x7.h"
 
 /* We need to create an object here so that the ISR knows what to talk to */
-SparkFun_LED_8x7 plex;
+SparkFun_LED_8x7 Plex;
 
 SparkFun_LED_8x7::SparkFun_LED_8x7()
 {
@@ -253,5 +253,5 @@ void SparkFun_LED_8x7::isr()
 }
 
 ISR(TIMER2_OVF_vect) {
-    plex.isr();
+    Plex.isr();
 }
