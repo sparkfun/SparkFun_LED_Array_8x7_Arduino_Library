@@ -44,7 +44,7 @@ Distributed as-is; no warranty is given.
 #include <Chaplex.h>
 
 // Global variables
-static byte led_pins[] = {9,8,7,6,5,4,3,2};
+byte led_pins[] = {2,3,4,5,6,7,8,9};
 int x;
 int y;
 int state;

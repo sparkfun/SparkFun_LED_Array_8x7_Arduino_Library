@@ -159,6 +159,26 @@ void SparkFun_LED_8x7::pixel(uint8_t x, uint8_t y, uint8_t on /* = 1 */)
 }
 
 /**
+ * @brief Loads an array of LED states (on or off).
+ *
+ * param[in] bitmap Array of LED states. 0 = off, 1 = on.
+ */
+void SparkFun_LED_8x7::drawBitmap(byte bitmap[NUM_LEDS])
+{
+    uint8_t x;
+    uint8_t y;
+    
+    /* Transpose matrix 90 degrees (switch x and y) */
+    for ( x = 0; x < COL_SIZE; x++ ) {
+        for ( y = 0; y < ROW_SIZE; y++ ) {
+            frame_buffer_[(x * COL_SIZE) + y] = 
+                (bitmap[(y * ROW_SIZE) + x] ? 1: 0);
+            Serial.println(frame_buffer_[(x * COL_SIZE) + y], DEC);
+        }
+    }
+}
+
+/**
  * @brief Sets text to scroll across the LED array indefinitely
  *
  * @param[in] in_string Text to scroll

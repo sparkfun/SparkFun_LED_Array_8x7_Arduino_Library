@@ -59,6 +59,7 @@ public:
     void display();
     void clear();
     void pixel(uint8_t x, uint8_t y, uint8_t on = 1);
+    void drawBitmap(byte bitmap[NUM_LEDS]);
     
     /* Scrolling text methods */
     void scrollText(char *in_string);
