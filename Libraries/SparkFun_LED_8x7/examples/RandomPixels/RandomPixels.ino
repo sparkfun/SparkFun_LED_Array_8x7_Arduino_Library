@@ -1,11 +1,12 @@
+
 /****************************************************************
-ScrollText.ino
+RandomPixels.ino
 LED Array 8x7 Charlieplex
 Shawn Hymel @ SparkFun Electronics
-February 3, 2015
+February 9, 2015
 https://github.com/sparkfun/LED_Array_8x7_Charlieplex
 
-Scrolls text across the LED array for 10 seconds.
+Randomly turn pixels on and off.
 
 Hardware Connections:
 
@@ -41,38 +42,38 @@ Distributed as-is; no warranty is given.
 
 #include <SparkFun_LED_8x7.h>
 #include <Chaplex.h>
-#include <MemoryFree.h>
 
 // Global variables
-static byte led_pins[] = {9,8,7,6,5,4,3,2}; // Pins for LEDs
+static byte led_pins[] = {9,8,7,6,5,4,3,2};
+int x;
+int y;
+int state;
 
 void setup() {
-
-  // Initialize Serial port for debugging
-  Serial.begin(9600);
-  Serial.println();
-  Serial.println(F("------------------------------"));
-  Serial.println(F("SparkFun LED 8x7 - Scroll Text"));
-  Serial.println(F("------------------------------"));
   
-  // Initialize LED array
+  // Initialize and clear display
   Plex.init(led_pins);
-  
-  // Clear display
   Plex.clear();
   Plex.display();
+  
+  // Seed our random number generator using the "random"
+  // voltage on pin A0
+  randomSeed(analogRead(0));
 }
 
 void loop() {
   
-  Serial.print("RAM: ");
-  Serial.println(freeMemory());
+  // Choose a random number between 0 and 7 for x coordinate
+  x = random(0, 8);
   
-  // Scroll some text then stop
-  delay(2000);
-  Plex.scrollText("Testz!", 1);
-  delay(10000);
-  Plex.scrollText("Bum.");
-  //Plex.stopScrolling();
-  delay(2000);
+  // Choose a random number between 0 and 6 for y coordinate
+  y = random(0, 7);
+  
+  // Flip a coin for the state of the LED
+  state = random(0, 2);
+  
+  // Write to the LED display and wait before doing it again
+  Plex.pixel(x, y, state);
+  Plex.display();
+  delay(10);
 }

@@ -17,9 +17,26 @@
 
 #include "SparkFun_LED_8x7.h"
 
-/* We need to create an object here so that the ISR knows what to talk to */
+/* We need to create a global instance so that the ISR knows what to talk to */
 SparkFun_LED_8x7 Plex;
 
+/**
+ * @brief Define static member for the location of the LEDs
+ */
+const charlieLed SparkFun_LED_8x7::charlie_leds_[] = {
+                            {0,1}, {0,2}, {0,3}, {0,4}, {0,5}, {0,6}, {0,7},   
+                            {1,0}, {1,2}, {1,3}, {1,4}, {1,5}, {1,6}, {1,7},
+                            {2,0}, {2,1}, {2,3}, {2,4}, {2,5}, {2,6}, {2,7},
+                            {3,0}, {3,1}, {3,2}, {3,4}, {3,5}, {3,6}, {3,7},
+                            {4,0}, {4,1}, {4,2}, {4,3}, {4,5}, {4,6}, {4,7},
+                            {5,0}, {5,1}, {5,2}, {5,3}, {5,4}, {5,6}, {5,7},
+                            {6,0}, {6,1}, {6,2}, {6,3}, {6,4}, {6,5}, {6,7},
+                            {7,0}, {7,1}, {7,2}, {7,3}, {7,4}, {7,5}, {7,6}
+                            };
+
+/**
+ * @brief Constructor - Instantiates LED array object
+ */
 SparkFun_LED_8x7::SparkFun_LED_8x7()
 {
     /* Initialize members */
@@ -31,11 +48,23 @@ SparkFun_LED_8x7::SparkFun_LED_8x7()
 
 }
 
+/**
+ * @brief Destructor
+ */
 SparkFun_LED_8x7::~SparkFun_LED_8x7()
 {
 
 }
-
+    
+/**
+ * @brief Configures the pins on the Charlieplex array.
+ *
+ * You must call this function before performing any other actions on the
+ * LED array.
+ *
+ * @param[in] pins Array of pin numbers. Must be 8 bytes long.
+ * @return True if array configured. False on error.
+ */
 bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
 {
     /* If we are scrolling, stop and delete our string buffer */
@@ -80,19 +109,72 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
 
     /* Clear and load frame buffer */
     clear();
+    display();
     
     return true;
 }
 
-void SparkFun_LED_8x7::clear()
+/**
+ * @brief Writes the frame buffer to the LED buffer.
+ */
+void SparkFun_LED_8x7::display()
 {
-    for ( byte i = 0; i < 56; i++ ) {
-        frame_buffer_[i] = 0;
+    for ( byte i = 0; i < NUM_LEDS; i++ ) {
+        chaplex_->ledWrite(charlie_leds_[i], frame_buffer_[i]);
     }
-    display();
 }
 
+/**
+ * @brief Clears the Charlieplex array.
+ */
+void SparkFun_LED_8x7::clear()
+{
+    memset(frame_buffer_, 0, NUM_LEDS);
+}
+
+/**
+ * @brief Turns a pixel at a given (x, y) on or off
+ *
+ * Coordinates start (0, 0) from the top-left of the display.
+ *
+ * @param[in] x X coordinate for the pixel
+ * @param[in] y Y coordinate for the pixel
+ * @param[in] on 1 for on, 0 for off.
+ */
+void SparkFun_LED_8x7::pixel(uint8_t x, uint8_t y, uint8_t on /* = 1 */)
+{
+    /* Check to make sure that we are not accessing outside the array */
+    if ( x >= ROW_SIZE || y >= COL_SIZE ) {
+        return;
+    }
+    
+    /* Turn the specified LED on or off. Note that we need to switch our X and Y
+     * for the user, as X goes down and Y goes across on the actual LED display.
+     */
+    if ( on ) {
+        frame_buffer_[(x * COL_SIZE) + y] = 1;
+    } else {
+        frame_buffer_[(x * COL_SIZE) + y] = 0;
+    }
+}
+
+/**
+ * @brief Sets text to scroll across the LED array indefinitely
+ *
+ * @param[in] in_string Text to scroll
+ */
 void SparkFun_LED_8x7::scrollText(char *in_string)
+{
+    scrollText(in_string, 0);
+}
+
+/**
+ * @brief Scrolls text a specified number of times
+ *
+ * @param[in] in_string Text to scroll
+ * @param[in] times Number of times to scroll the text
+ */
+void SparkFun_LED_8x7::scrollText(char *in_string, int times)
 {
     int i;
     int j;
@@ -110,6 +192,8 @@ void SparkFun_LED_8x7::scrollText(char *in_string)
     /* Reset our counters */
     shift_count_ = 0;
     scroll_index_ = 0;
+    scroll_times_ = times;
+    scroll_count_ = 0;
     
     /* Calculate characters in the string */
     text_len = strlen(in_string);
@@ -190,9 +274,11 @@ void SparkFun_LED_8x7::scrollText(char *in_string)
 
     /* Start scrolling */
     scrolling_ = 1;
-    
 }
 
+/**
+ * @brief Stops scrolling text and deletes scroll buffer
+ */
 void SparkFun_LED_8x7::stopScrolling()
 {
     scrolling_ = 0;
@@ -201,13 +287,7 @@ void SparkFun_LED_8x7::stopScrolling()
         scroll_buf_ = NULL;
     }
     clear();
-}
-
-void SparkFun_LED_8x7::display()
-{
-    for ( byte i = 0; i < 56; i++ ) {
-        chaplex_->ledWrite(g_leds[i], frame_buffer_[i]);
-    }
+    display();
 }
 
 void SparkFun_LED_8x7::isr()
@@ -242,6 +322,12 @@ void SparkFun_LED_8x7::isr()
             scroll_index_++;
             if ( scroll_index_ >= scroll_len_ ) {
                 scroll_index_ = 0;
+                if ( scroll_times_ > 0 ) {
+                    scroll_count_++;
+                    if ( scroll_count_ >= scroll_times_ ) {
+                        stopScrolling();
+                    }
+                }
             }
         }
     }
@@ -252,6 +338,13 @@ void SparkFun_LED_8x7::isr()
     TIMSK2 |= (1 << TOIE2);        // Enable timer overflow interrupt
 }
 
+/**
+ * @brief Global interrupt service routine for Timer 2
+ *
+ * We define Timer 2 ISR here to allow us to make calls to functions in the
+ * SparkFun_LED_8x7 class. To do this, we instantiate a SparkFun_LED_8x7 object
+ * (globally) in the .cpp file.
+ **/
 ISR(TIMER2_OVF_vect) {
     Plex.isr();
 }
