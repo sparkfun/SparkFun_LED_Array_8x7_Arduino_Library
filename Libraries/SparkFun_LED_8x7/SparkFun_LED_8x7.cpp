@@ -249,6 +249,32 @@ void SparkFun_LED_8x7::rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height)
 }
 
 /**
+ * @brief Draws a filled rectangle beginning at (x, y) with width, height
+ *
+ * param[in] x X coordinate for top left of rectangle
+ * param[in] y Y coordinate for top left of rectangle
+ * param[in] width Width of rectangle in pixels
+ * param[in] height Height of rectangle in pixels
+ */
+void SparkFun_LED_8x7::rectFill(uint8_t x, 
+                                uint8_t y, 
+                                uint8_t width, 
+                                uint8_t height)
+{
+    int i;
+    
+    /* We can't have a width or height of 0; there would be no rectangle */
+    if ( width == 0 || height == 0 ) {
+        return;
+    }
+    
+    /* Make a filled rectangle with a  bunch of horizontal lines */
+    for ( i = y; i < y + height; i++ ) {
+        line(x, i, x + width - 1, i);
+    }
+}                                    
+
+/**
  * @brief Loads an array of LED states (on or off).
  *
  * param[in] bitmap Array of LED states. 0 = off, 1 = on.
