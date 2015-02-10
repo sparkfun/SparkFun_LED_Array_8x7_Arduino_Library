@@ -1,7 +1,7 @@
 /**
  * @file    SparkFun_LED_8x7.h
  * @brief   Library for the SparkFun 8x7 Charlieplex LED Array
- * @author  Shawn Hymel (SparkFun Electronics)
+ * @author  Shawn Hymel, Jim Lindblom (SparkFun Electronics)
  *
  * @copyright	This code is public domain but you buy me a beer if you use
  * this and we meet someday (Beerware license).
@@ -9,6 +9,9 @@
  * This library controls the 8x7 Charlieplex LED array. Note that Timer2 is used
  * in this library to control the LED refresh. You will not be able to use it
  * for other uses.
+ *
+ * The graphics algorithms are based on Jim Lindblom's Micro OLED library:
+ * https://github.com/sparkfun/Micro_OLED_Breakout
  *
  * Relies on the Chaplex library written by Stefan Götze.
  */
@@ -65,6 +68,8 @@ public:
     void line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
     void rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
     void rectFill(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
+    void circle(uint8_t x0, uint8_t y0, uint8_t radius);
+    void circleFill(uint8_t x0, uint8_t y0, uint8_t radius);
     void drawBitmap(byte bitmap[NUM_LEDS]);
     
     /* Scrolling text methods */

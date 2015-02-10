@@ -1,7 +1,7 @@
 /**
  * @file    SparkFun_LED_8x7.cpp
  * @brief   Library for the SparkFun 8x7 Charlieplex LED Array
- * @author  Shawn Hymel (SparkFun Electronics)
+ * @author  Shawn Hymel, Jim Lindblom (SparkFun Electronics)
  *
  * @copyright	This code is public domain but you buy me a beer if you use
  * this and we meet someday (Beerware license).
@@ -9,6 +9,9 @@
  * This library controls the 8x7 Charlieplex LED array. Note that Timer2 is used
  * in this library to control the LED refresh. You will not be able to use it
  * for other uses.
+ *
+ * The graphics algorithms are based on Jim Lindblom's Micro OLED library:
+ * https://github.com/sparkfun/Micro_OLED_Breakout
  *
  * Relies on the Chaplex library written by Stefan Götze.
  */
@@ -272,7 +275,67 @@ void SparkFun_LED_8x7::rectFill(uint8_t x,
     for ( i = y; i < y + height; i++ ) {
         line(x, i, x + width - 1, i);
     }
-}                                    
+}        
+
+/**
+ * @brief Draws a circle on the LED array
+ *
+ * @param[in] x X coordinate for the center of the circle
+ * @param[in] y Y coordinate for the center of the circle
+ * @param[in] radius Distance (in pixels) from center to edge of circle
+ */
+void SparkFun_LED_8x7::circle(uint8_t x0, uint8_t y0, uint8_t radius)
+{
+    int8_t y;
+    int8_t x;
+    int8_t f;
+    int8_t ddF_x;
+    int8_t ddF_y;
+    
+    f = 1 - radius;
+    ddF_x = 1;
+    ddF_y = -2 * radius;
+    x = 0;
+    y = radius;
+    
+    pixel(x0, y0 + radius);
+    pixel(x0, y0 - radius);
+    pixel(x0 + radius, y0);
+    pixel(x0 - radius, y0);
+    
+    while ( x < y ) {
+        if ( f >= 0 ) {
+            y--;
+            ddF_y += 2;
+            f += ddF_y;
+        }
+        x++;
+        ddF_x += 2;
+        f += ddF_x;
+        
+        pixel(x0 + x, y0 + y);
+        pixel(x0 - x, y0 + y);
+        pixel(x0 + x, y0 - y);
+        pixel(x0 - x, y0 - y);
+        
+        pixel(x0 + y, y0 + x);
+        pixel(x0 - y, y0 + x);
+        pixel(x0 + y, y0 - x);
+        pixel(x0 - y, y0 - x);
+    }
+}
+
+/**
+ * @brief Draws a filled circle on the LED array
+ *
+ * @param[in] x X coordinate for the center of the circle
+ * @param[in] y Y coordinate for the center of the circle
+ * @param[in] radius Distance (in pixels) from center to edge of circle
+ */
+void circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
+{
+
+}    
 
 /**
  * @brief Loads an array of LED states (on or off).
@@ -285,11 +348,10 @@ void SparkFun_LED_8x7::drawBitmap(byte bitmap[NUM_LEDS])
     uint8_t y;
     
     /* Transpose matrix 90 degrees (switch x and y) */
-    for ( x = 0; x < COL_SIZE; x++ ) {
-        for ( y = 0; y < ROW_SIZE; y++ ) {
+    for ( x = 0; x < ROW_SIZE; x++ ) {
+        for ( y = 0; y < COL_SIZE; y++ ) {
             frame_buffer_[(x * COL_SIZE) + y] = 
                 (bitmap[(y * ROW_SIZE) + x] ? 1: 0);
-            Serial.println(frame_buffer_[(x * COL_SIZE) + y], DEC);
         }
     }
 }
