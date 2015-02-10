@@ -1,12 +1,11 @@
-
 /****************************************************************
-RandomPixels.ino
+DrawShapes.ino
 LED Array 8x7 Charlieplex
 Shawn Hymel @ SparkFun Electronics
 February 9, 2015
 https://github.com/sparkfun/LED_Array_8x7_Charlieplex
 
-Randomly turn pixels on and off.
+Draws lines, rectangles, and circles on the LEDs.
 
 Hardware Connections:
 
@@ -44,10 +43,7 @@ Distributed as-is; no warranty is given.
 #include <Chaplex.h>
 
 // Global variables
-byte led_pins[] = {2, 3, 4, 5, 6, 7, 8, 9}; // Pins for LEDs
-int x;
-int y;
-int state;
+byte led_pins[] = {9, 8, 7, 6, 5, 4, 3, 2}; // Pins for LEDs
 
 void setup() {
   
@@ -55,25 +51,21 @@ void setup() {
   Plex.init(led_pins);
   Plex.clear();
   Plex.display();
-  
-  // Seed our random number generator using the "random"
-  // voltage on pin A0
-  randomSeed(analogRead(0));
 }
 
 void loop() {
   
-  // Choose a random number between 0 and 7 for x coordinate
-  x = random(0, 8);
+  // Draw a line
+  //Plex.line(1, 1, 2, 5);
+  //Plex.display();
   
-  // Choose a random number between 0 and 6 for y coordinate
-  y = random(0, 7);
+  // Draw a rectangle
+  for ( int i = 0; i < 9; i++ ) {
+    Plex.clear();
+    Plex.rect(1, 1, i, i);
+    Plex.display();
+    delay(100);
+  }
   
-  // Flip a coin for the state of the LED
-  state = random(0, 2);
-  
-  // Write to the LED display and wait before doing it again
-  Plex.pixel(x, y, state);
-  Plex.display();
-  delay(10);
+  delay(1000);
 }

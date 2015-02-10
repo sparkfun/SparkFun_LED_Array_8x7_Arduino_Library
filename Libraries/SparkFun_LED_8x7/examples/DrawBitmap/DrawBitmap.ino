@@ -5,7 +5,7 @@ Shawn Hymel @ SparkFun Electronics
 February 9, 2015
 https://github.com/sparkfun/LED_Array_8x7_Charlieplex
 
-Loads and draws bitmaps on the LEDs.
+Draws bitmaps on the LEDs.
 
 Hardware Connections:
 
@@ -43,7 +43,7 @@ Distributed as-is; no warranty is given.
 #include <Chaplex.h>
 
 // Global variables
-byte led_pins[] = {2,3,4,5,6,7,8,9}; // Pins for LEDs
+byte led_pins[] = {2, 3, 4, 5, 6, 7, 8, 9}; // Pins for LEDs
 
 byte bitmap_1[] = { 0,0,0,0,0,0,0,0,
                     0,0,1,0,0,1,0,0,

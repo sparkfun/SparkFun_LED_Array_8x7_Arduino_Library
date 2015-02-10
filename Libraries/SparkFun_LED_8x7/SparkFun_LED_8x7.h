@@ -17,9 +17,12 @@
 #define SparkFun_LED_8x7_H
 
 #include <Arduino.h>
-
 #include <Chaplex.h>
+
 #include "LED_Font_1.h"
+
+/* Macros */
+#define swap(a, b) { uint8_t t = a; a = b; b = t; }
 
 /* Debug */
 #define LED_8X7_DEBUG   0
@@ -59,6 +62,8 @@ public:
     void display();
     void clear();
     void pixel(uint8_t x, uint8_t y, uint8_t on = 1);
+    void line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
+    void rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
     void drawBitmap(byte bitmap[NUM_LEDS]);
     
     /* Scrolling text methods */

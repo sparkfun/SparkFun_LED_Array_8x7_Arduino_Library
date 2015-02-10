@@ -159,6 +159,96 @@ void SparkFun_LED_8x7::pixel(uint8_t x, uint8_t y, uint8_t on /* = 1 */)
 }
 
 /**
+ * @brief Draws a line from (x0, y0) to (x1, y1)
+ *
+ * @param[in] x0 X coordinate for the beginning of the line
+ * @param[in] y0 Y coordinate for the beginning of the line
+ * @param[in] x1 X coordinate for the ending of the line
+ * @param[in] y1 Y coordinate for the ending of the line
+ */
+void SparkFun_LED_8x7::line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
+{
+    uint8_t steep;
+    uint8_t x;
+    uint8_t y;
+    uint8_t dx;
+    uint8_t dy;
+    int8_t err;
+    int8_t y_step;
+    
+    /* Determine if we need to increment in x or y direction */
+    steep = (abs(y1 - y0) > abs(x1 - x0)) ? 1 : 0;
+    if ( steep ) {
+        swap(x0, y0);
+        swap(x1, y1);
+    }
+    
+    /* Make sure we always increment up */
+    if ( x0 > x1 ) {
+        swap(x0, x1);
+        swap(y0, y1);
+    }
+    
+    /* Calculate rise and span */
+    dx = x1 - x0;
+    dy = abs(y1 - y0);
+    
+    /* Set initial rise/fall error */
+    err = dx >> 1;      // Divide by 2
+    
+    /* Determine our y step depending on rise or fall direction */
+    if ( y0 < y1 ) {
+        y_step = 1;
+    } else {
+        y_step = -1;
+    }
+    
+    /* Step through the line, turning on pixels */
+    y = y0;
+    for ( x = x0; x <= x1; x++ ) {
+        if ( steep ) {
+            pixel(y, x);
+        } else {
+            pixel(x, y);
+        }
+        err -= dy;
+        if ( err < 0 ) {
+            y += y_step;
+            err += dx;
+        }
+    }
+}
+
+/**
+ * @brief Draws a rectangle beginning at (x, y) with specified width and height
+ *
+ * param[in] x X coordinate for top left of rectangle
+ * param[in] y Y coordinate for top left of rectangle
+ * param[in] width Width of rectangle in pixels
+ * param[in] height Height of rectangle in pixels
+ */
+void SparkFun_LED_8x7::rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height)
+{
+    /* We can't have a width or height of 0; there would be no rectangle */
+    if ( width == 0 || height == 0 ) {
+        return;
+    }
+
+    /* Draw our horizontal lines */
+    line(x, y, x + width - 1, y);
+    line(x, y + height - 1, x + width - 1, y + height - 1);
+    
+    /* Don't draw vertical lines if the rectangle is height 2 or less */
+    if ( height <= 2 ) {
+        return;
+    }
+    
+    /* Draw our vertical lines */
+    line(x, y, x, y + height - 1);
+    line(x + width - 1, y, x + width - 1, y + height - 1);
+}
+
+/**
  * @brief Loads an array of LED states (on or off).
  *
  * param[in] bitmap Array of LED states. 0 = off, 1 = on.
