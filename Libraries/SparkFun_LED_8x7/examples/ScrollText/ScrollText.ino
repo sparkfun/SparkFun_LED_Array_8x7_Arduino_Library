@@ -41,20 +41,12 @@ Distributed as-is; no warranty is given.
 
 #include <SparkFun_LED_8x7.h>
 #include <Chaplex.h>
-#include <MemoryFree.h>
 
 // Global variables
-static byte led_pins[] = {9,8,7,6,5,4,3,2}; // Pins for LEDs
+static byte led_pins[] = {2, 3, 4, 5, 6, 7, 8, 9}; // Pins for LEDs
 
 void setup() {
 
-  // Initialize Serial port for debugging
-  Serial.begin(9600);
-  Serial.println();
-  Serial.println(F("------------------------------"));
-  Serial.println(F("SparkFun LED 8x7 - Scroll Text"));
-  Serial.println(F("------------------------------"));
-  
   // Initialize LED array
   Plex.init(led_pins);
   
@@ -65,14 +57,13 @@ void setup() {
 
 void loop() {
   
-  Serial.print("RAM: ");
-  Serial.println(freeMemory());
+  // Scroll text 2 times
+  Plex.scrollText("Hello. :)", 2);
+  delay(12000);
   
-  // Scroll some text then stop
-  delay(2000);
-  Plex.scrollText("Testz!", 1);
+  // Scroll text until we stop it
+  Plex.scrollText("Let's scroll!");
   delay(10000);
-  Plex.scrollText("Bum.");
-  //Plex.stopScrolling();
-  delay(2000);
+  Plex.stopScrolling();
+  delay(1000);
 }

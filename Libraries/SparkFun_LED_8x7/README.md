@@ -6,7 +6,7 @@ Arduino library for the 8x7 LED Charlieplex Array
 Version
 -------
 
-**v0.1**
+**v0.9**
 
 Known Issues
 ------------
@@ -41,6 +41,11 @@ Getting Started
 
 Version History
 ---------------
+
+**v0.9**
+
+* Implemented scrolling text, bitmaps, and shapes
+* Skipped a bunch of versions because I'm lazy
 
 **v0.1**
 

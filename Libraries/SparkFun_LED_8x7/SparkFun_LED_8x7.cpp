@@ -332,9 +332,50 @@ void SparkFun_LED_8x7::circle(uint8_t x0, uint8_t y0, uint8_t radius)
  * @param[in] y Y coordinate for the center of the circle
  * @param[in] radius Distance (in pixels) from center to edge of circle
  */
-void circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
+void SparkFun_LED_8x7::circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
 {
-
+    int8_t y;
+    int8_t x;
+    int8_t f;
+    int8_t ddF_x;
+    int8_t ddF_y;
+    int8_t i;
+    
+    f = 1 - radius;
+    ddF_x = 1;
+    ddF_y = -2 * radius;
+    x = 0;
+    y = radius;
+    
+    for ( i = y0 - radius; i <= y0 + radius; i++ ) {
+        pixel(x0, i);
+        Serial.print("Drawing (");
+        Serial.print(x0);
+        Serial.print(",");
+        Serial.print(i);
+        Serial.println(")");
+    }
+    
+    while ( x < y ) {
+        if ( f >= 0 ) {
+            y--;
+            ddF_y += 2;
+            f += ddF_y;
+        }
+        x++;
+        ddF_x += 2;
+        f += ddF_x;
+        
+        for ( i = y0 - y; i <= y0 + y; i++ ) {
+            pixel(x0 + x, i);
+            pixel(x0 - x, i);
+        }
+        
+        for ( i = y0 - x; i <= y0 + x; i++ ) {
+            pixel(x0 + y, i);
+            pixel(x0 - y, i);
+        }
+    }
 }    
 
 /**
@@ -486,6 +527,26 @@ void SparkFun_LED_8x7::stopScrolling()
     }
     clear();
     display();
+}
+
+/**
+ * @brief Returns the width of the LED array
+ *
+ * @return width of the array (number of LEDs)
+ */
+uint8_t SparkFun_LED_8x7::getArrayWidth()
+{
+    return ROW_SIZE;
+}
+
+/**
+ * @brief Returns the width of the LED array
+ *
+ * @return width of the array (number of LEDs)
+ */
+uint8_t SparkFun_LED_8x7::getArrayHeight()
+{
+    return COL_SIZE;
 }
 
 void SparkFun_LED_8x7::isr()

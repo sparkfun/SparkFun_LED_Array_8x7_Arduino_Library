@@ -76,7 +76,10 @@ public:
     void scrollText(char *in_string);
     void scrollText(char *in_string, int times);
     void stopScrolling();
-
+    
+    /* Support methods */
+    uint8_t getArrayWidth();
+    uint8_t getArrayHeight();
 
 private:
 
