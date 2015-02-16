@@ -6,7 +6,7 @@ Arduino library for the 8x7 LED Charlieplex Array
 Version
 -------
 
-**v0.9**
+**v1.0**
 
 Known Issues
 ------------
@@ -41,6 +41,11 @@ Getting Started
 
 Version History
 ---------------
+
+**v1.0**
+
+* Release for SX Create 2015
+* Updated drawBitmap() parameter to accept a const array
 
 **v0.9**
 

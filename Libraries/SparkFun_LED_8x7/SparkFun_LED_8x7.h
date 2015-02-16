@@ -70,7 +70,7 @@ public:
     void rectFill(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
     void circle(uint8_t x0, uint8_t y0, uint8_t radius);
     void circleFill(uint8_t x0, uint8_t y0, uint8_t radius);
-    void drawBitmap(byte bitmap[NUM_LEDS]);
+    void drawBitmap(const byte bitmap[NUM_LEDS]);
     
     /* Scrolling text methods */
     void scrollText(char *in_string);

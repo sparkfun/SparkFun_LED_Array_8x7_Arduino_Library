@@ -383,7 +383,7 @@ void SparkFun_LED_8x7::circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
  *
  * param[in] bitmap Array of LED states. 0 = off, 1 = on.
  */
-void SparkFun_LED_8x7::drawBitmap(byte bitmap[NUM_LEDS])
+void SparkFun_LED_8x7::drawBitmap(const byte bitmap[NUM_LEDS])
 {
     uint8_t x;
     uint8_t y;
