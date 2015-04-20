@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -27721,9 +27721,20 @@ Standard 8-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <sheets>
 <sheet>
 <plain>
+<text x="24.638" y="104.14" size="1.778" layer="97" align="center">A</text>
+<text x="24.638" y="106.68" size="1.778" layer="97" align="center">B</text>
+<text x="24.638" y="109.22" size="1.778" layer="97" align="center">C</text>
+<text x="24.638" y="111.76" size="1.778" layer="97" align="center">D</text>
+<text x="24.638" y="114.3" size="1.778" layer="97" align="center">E</text>
+<text x="24.638" y="116.84" size="1.778" layer="97" align="center">F</text>
+<text x="24.638" y="119.38" size="1.778" layer="97" align="center">G</text>
+<text x="24.638" y="121.92" size="1.778" layer="97" align="center">H</text>
 </plain>
 <instances>
-<instance part="FRAME1" gate="G$1" x="0" y="0"/>
+<instance part="FRAME1" gate="G$1" x="0" y="0">
+<attribute name="DESIGNER" x="166.37" y="11.43" size="2.54" layer="94"/>
+<attribute name="VERSION" x="238.76" y="7.62" size="2.54" layer="94"/>
+</instance>
 <instance part="FRAME1" gate="V" x="147.32" y="0"/>
 <instance part="R1" gate="G$1" x="50.8" y="132.08" smashed="yes">
 <attribute name="PROD_ID" x="50.8" y="132.08" size="1.778" layer="96" display="off"/>
