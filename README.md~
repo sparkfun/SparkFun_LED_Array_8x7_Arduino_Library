@@ -22,8 +22,19 @@ Documentation
 
 * **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
 * **[Product Repository](https://github.com/sparkfun/BadgerArray)** - Main repository (including hardware files) for the Badger Array.
-* **[Hookup Guide](https://learn.sparkfun.com/tutorials/badgerhack)** - Basic hookup guide for the Badger Array.
+* **[Hookup Guide](Learn.SparkFun URL)** - Basic hookup guide for the <PRODUCT NAME>.
 
+Products that use this Library 
+---------------------------------
+
+* [Part SKU](SparkFun part URL)- Basic part and short description here
+* [Part SKU](SparkFun part URL)- Basic part and short description here
+
+Version History
+---------------
+
+* [vExxFxxZxxHxxLxxSxx](URL for tag specific to this version) - Description 
+* [vEyyFyyZyyHyyLyySyy](URL for tag specific to this version) - Description
 
 License Information
 -------------------
@@ -38,4 +49,4 @@ Distributed as-is; no warranty is given.
 
 - Your friends at SparkFun.
 
-
+_<COLLABORATION CREDIT>_
