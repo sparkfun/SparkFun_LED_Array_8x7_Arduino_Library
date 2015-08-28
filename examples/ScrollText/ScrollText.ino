@@ -57,9 +57,8 @@ void setup() {
 
 void loop() {
   
-  // Scroll text 2 times
-  Plex.scrollText("Hello. :)", 2);
-  delay(12000);
+  // Scroll text 2 times (blocking)
+  Plex.scrollText("Hello. :)", 2, true);
   
   // Scroll text until we stop it
   Plex.scrollText("Let's scroll!");

@@ -74,7 +74,7 @@ public:
     
     /* Scrolling text methods */
     void scrollText(char *in_string);
-    void scrollText(char *in_string, int times);
+    void scrollText(char *in_string, int times, bool blocking = false);
     void stopScrolling();
     
     /* Support methods */
@@ -87,11 +87,11 @@ private:
     inline void isr();
 
     /* Members */
-    Chaplex *chaplex_;      /// Chaplex object for controlling the LEDs
-    byte frame_buffer_[56]; /// Storing the state of each LED to be written
-    byte timer2_count_;     /// Stores the next start point for Timer2
-    byte *scroll_buf_;      /// Buffer of text graphics to scroll
-    byte scrolling_;        /// Boolean to indicate if we are scrolling text
+    Chaplex *chaplex_;          /// Chaplex object for controlling the LEDs
+    byte frame_buffer_[56];     /// Storing the state of each LED to be written
+    byte timer2_count_;         /// Stores the next start point for Timer2
+    byte *scroll_buf_;          /// Buffer of text graphics to scroll
+    volatile byte scrolling_;   /// Boolean to indicate if we are scrolling text
     unsigned int shift_count_;  /// Count number of ticks before shifting text
     unsigned int shift_delay_;  /// Number of ticks to wait before shifting text
     unsigned int scroll_index_; /// Index of where to scroll text

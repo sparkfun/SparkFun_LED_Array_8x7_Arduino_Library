@@ -408,12 +408,13 @@ void SparkFun_LED_8x7::scrollText(char *in_string)
 }
 
 /**
- * @brief Scrolls text a specified number of times
+ * @brief Scrolls text a specified number of times while blocking processor
  *
  * @param[in] in_string Text to scroll
  * @param[in] times Number of times to scroll the text
+ * @param[in] blocking True to stop execution until scrolling complete
  */
-void SparkFun_LED_8x7::scrollText(char *in_string, int times)
+void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
 {
     int i;
     int j;
@@ -513,6 +514,15 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times)
 
     /* Start scrolling */
     scrolling_ = 1;
+    
+    /* If we are blocking, stop execution until scrolling is done */
+    if ( blocking ) {
+        while ( scrolling_ ) {
+#if 0
+            Serial.println("Waiting...");
+#endif
+        }
+    }
 }
 
 /**
