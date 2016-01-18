@@ -33,7 +33,20 @@
 /* Constants */
 #define NUM_CHAPLEX_PINS    8       // Number of pins   
 #define TIMER2_TCNT         248     // Refresh: (256-248)*(1024)/(4 MHz)=2.05 ms
-#define DEFAULT_SHIFT_DELAY 50      // Number of ticks to wait before scrolling
+
+//Set shift delay by CPU frequency
+#if F_CPU==16000000
+#define DEFAULT_SHIFT_DELAY 200		// Number of ticks to wait before scrolling
+#else
+	#if F_CPU==8000000
+	#define DEFAULT_SHIFT_DELAY 100		// Number of ticks to wait before scrolling
+	#else
+		#if F_CPU==4000000
+		#define DEFAULT_SHIFT_DELAY 50		// Number of ticks to wait before scrolling
+		#endif
+	#endif
+#endif
+
 #define MAX_CHARS           100     // Maximum characters to scroll
 #define CHAR_OFFSET         0x20    // Starting place for ASCII characters
 #define CHAR_SPACE          1       // Number of blank columns between chars
