@@ -24,6 +24,12 @@ Documentation
 * **[Product Repository](https://github.com/sparkfun/BadgerArray)** - Main repository (including hardware files) for the Badger Array.
 * **[Hookup Guide](https://learn.sparkfun.com/tutorials/badgerhack)** - Basic hookup guide for the Badger Array.
 
+https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/commits/master
+
+GitHub Version History
+---------------
+* [V1.1.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.1.0) - The library has been updated to be compliant with the RedStick.
+* [V1.0.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.0.0) - This is the original BadgerStick release.
 
 License Information
 -------------------
