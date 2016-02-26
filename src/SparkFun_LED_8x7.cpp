@@ -45,7 +45,7 @@ SparkFun_LED_8x7::SparkFun_LED_8x7()
     /* Initialize members */
     scrolling_ = 0;
     shift_count_ = 0;
-    shift_delay_ = DEFAULT_SHIFT_DELAY;
+    shift_delay_ = 200; // Arbitrary long wait before scrolling
     scroll_index_ = 0;
     scroll_len_ = 0;
 
@@ -70,6 +70,12 @@ SparkFun_LED_8x7::~SparkFun_LED_8x7()
  */
 bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
 {
+
+// Right now, we only compile for the ATmega 168/328-based Arduinos
+#if defined __AVR_ATmega168__ || \
+    defined __AVR_ATmega328__ || \
+    defined __AVR_ATmega328P__
+
     /* If we are scrolling, stop and delete our string buffer */
     if ( scrolling_ ) {
         stopScrolling();
@@ -83,14 +89,14 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
     scroll_len_ = 0;
 
     /* Print out the pins we are using */
-#if LED_8X7_DEBUG
+# if LED_8X7_DEBUG
     Serial.print(F("Using pins: "));
     for ( int i = 0; i < NUM_CHAPLEX_PINS; i++ ) {
         Serial.print(pins[i]);
         Serial.print(" ");
     }
     Serial.println();
-#endif
+# endif
 
     /* If we alread have a Chaplex object, delete it */
     if ( chaplex_ != NULL ) {
@@ -100,21 +106,30 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
     /* Create a new Chaplex object so we can write stuff to the LEDs */
     chaplex_ = new Chaplex(pins, NUM_CHAPLEX_PINS);
 
+    /* Calculate the Timer 2 reset number. Aim for 2.048 ms refresh.
+       count = 256 - (2.048 ms * F_CPU) / 1024 */
+    timer2_count_ = 256 - (2 * (F_CPU / 1000000));  // Aim for 2.048ms refresh
+    
     /* Initialize Timer 2 */
-    timer2_count_ = TIMER2_TCNT;            // Load in starting count
-    noInterrupts();                         // Disable interrupts
-    TCCR2A = 0;                             // Normal operation
-    TCCR2B = 0;                             // Clear prescaler
-    TCNT2 = timer2_count_;                  // Load counter
+    noInterrupts();                                 // Disable interrupts
+    TCCR2A = 0;                                     // Normal operation
+    TCCR2B = 0;                                     // Clear prescaler
+    TCNT2 = timer2_count_;                          // Load counter
     TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);  // Prescaler = 1024
-    TIMSK2 |= (1 << TOIE2);                 // Enable timer overflow interrupt
-    interrupts();                           // Enable all interrupts
+    TIMSK2 |= (1 << TOIE2);                         // Enable timer overflow
+    interrupts();                                   // Enable all interrupts
 
     /* Clear and load frame buffer */
     clear();
     display();
     
     return true;
+    
+#else
+
+    return false;
+    
+#endif
 }
 
 /**
@@ -559,6 +574,10 @@ uint8_t SparkFun_LED_8x7::getArrayHeight()
     return COL_SIZE;
 }
 
+#if defined __AVR_ATmega168__ || \
+    defined __AVR_ATmega328__ || \
+    defined __AVR_ATmega328P__
+
 void SparkFun_LED_8x7::isr()
 {
 
@@ -617,3 +636,12 @@ void SparkFun_LED_8x7::isr()
 ISR(TIMER2_OVF_vect) {
     Plex.isr();
 }
+
+#else
+
+void SparkFun_LED_8x7::isr()
+{
+
+}
+
+#endif

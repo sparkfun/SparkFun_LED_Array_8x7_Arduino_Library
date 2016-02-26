@@ -32,20 +32,9 @@
 
 /* Constants */
 #define NUM_CHAPLEX_PINS    8       // Number of pins   
-#define TIMER2_TCNT         248     // Refresh: (256-248)*(1024)/(4 MHz)=2.05 ms
 
-//Set shift delay by CPU frequency
-#if F_CPU==16000000
-#define DEFAULT_SHIFT_DELAY 200		// Number of ticks to wait before scrolling
-#else
-	#if F_CPU==8000000
-	#define DEFAULT_SHIFT_DELAY 100		// Number of ticks to wait before scrolling
-	#else
-		#if F_CPU==4000000
-		#define DEFAULT_SHIFT_DELAY 50		// Number of ticks to wait before scrolling
-		#endif
-	#endif
-#endif
+//Set shift delay
+#define DEFAULT_SHIFT_DELAY 50		// Number of ticks to wait before scrolling
 
 #define MAX_CHARS           100     // Maximum characters to scroll
 #define CHAR_OFFSET         0x20    // Starting place for ASCII characters
@@ -57,8 +46,6 @@
 #define ALL_BUT_LAST_COL    NUM_LEDS - COL_SIZE
 
 /* Global variables */
-
- 
 ISR(TIMER2_OVF_vect);
 
 /* LED Array class */
@@ -102,7 +89,7 @@ private:
     /* Members */
     Chaplex *chaplex_;          /// Chaplex object for controlling the LEDs
     byte frame_buffer_[56];     /// Storing the state of each LED to be written
-    byte timer2_count_;         /// Stores the next start point for Timer2
+    uint8_t timer2_count_;      /// Stores the next start point for Timer2
     byte *scroll_buf_;          /// Buffer of text graphics to scroll
     volatile byte scrolling_;   /// Boolean to indicate if we are scrolling text
     unsigned int shift_count_;  /// Count number of ticks before shifting text
