@@ -23,10 +23,8 @@ Documentation
 --------------
 
 * **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
-* **[Product Repository](https://github.com/sparkfun/BadgerArray)** - Main repository (including hardware files) for the Badger Array.
-* **[Hookup Guide](https://learn.sparkfun.com/tutorials/badgerhack)** - Basic hookup guide for the Badger Array.
-
-https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/commits/master
+* **[Product Repository](https://github.com/sparkfun/LED_Array_8x7)** - Main repository (including hardware files) for the LED Array.
+* **[Hookup Guide](https://learn.sparkfun.com/tutorials/sparkfun-led-array-8x7-hookup-guide)** - Basic hookup guide for the LED Array.
 
 GitHub Version History
 ---------------
