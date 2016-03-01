@@ -9,14 +9,13 @@ Arduino Library for the charlieplexed 8x7 LED Array.
 
 To use the LED array with any 328-based Arduino, see the [SparkFun LED Array (8x7) Hookup Guide](https://learn.sparkfun.com/tutorials/sparkfun-led-array-8x7-hookup-guide).
 
-The LED array also comes with the BadgerHack badges. Please check out the [BadgerHack Tutorial](http://sfe.io/t349) for more information. The BadgerHack Demos are available [here](https://github.com/sparkfun/BadgerHack_Demos).
+A version of the LED array (called the "BadgerArray") also comes with the BadgerHack badges. Please check out the [BadgerHack Tutorial](http://sfe.io/t349) for more information. The BadgerHack Demos are available [here](https://github.com/sparkfun/BadgerHack_Demos).
 
 Repository Contents
 -------------------
 
 * **/examples** - Example sketches for the library (.ino). Run these from the Arduino IDE. 
 * **/src** - Source files for the library (.cpp, .h).
-* **keywords.txt** - Keywords from this library that will be highlighted in the Arduino IDE. 
 * **library.properties** - General library properties for the Arduino package manager. 
 
 Documentation
