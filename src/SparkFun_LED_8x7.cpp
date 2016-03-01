@@ -478,7 +478,7 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
         }
 
         /* Add the number of columns in the character plus the space after */
-        scroll_len_ += pgm_read_byte(char_table[char_ind]);
+        scroll_len_ += getPGMFontByte(char_ind);
         scroll_len_ += CHAR_SPACE;
     }
     scroll_len_ += END_SPACE;
@@ -501,9 +501,9 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
         }
         
         /* For that character, load in the definition (bytes show which LEDs) */
-        char_size = pgm_read_byte(char_table[char_ind]);
+        char_size = getPGMFontByte(char_ind);
         for ( j = 1; j < char_size + 1; j++ ) {
-            scroll_buf_[buf_ind] = pgm_read_byte(char_table[char_ind] + j);
+            scroll_buf_[buf_ind] = getPGMFontByte(char_ind, j);
             buf_ind++;
         }
         
@@ -572,6 +572,18 @@ uint8_t SparkFun_LED_8x7::getArrayWidth()
 uint8_t SparkFun_LED_8x7::getArrayHeight()
 {
     return COL_SIZE;
+}
+
+/**
+ * @brief Returns the byte at the specified location from the font PROGMEM
+ *
+ * @param[in] idx the index for the character
+ * @param[in] offset number of bytes off from the beginning of the character
+ * @return byte at the specified location
+ */
+unsigned char SparkFun_LED_8x7::getPGMFontByte(int idx, int offset /* = 0 */)
+{
+    return pgm_read_byte(pgm_read_word(&char_table[idx]) + offset);
 }
 
 #if defined __AVR_ATmega168__ || \

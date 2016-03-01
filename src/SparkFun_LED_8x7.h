@@ -83,6 +83,9 @@ public:
 
 private:
 
+    /* Helper function to read bytes from an array in PROGMEM */
+    unsigned char getPGMFontByte(int idx, int offset = 0);
+
     /* Interrupt service routine that is called by the system's ISR */
     inline void isr();
 

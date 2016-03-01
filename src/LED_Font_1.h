@@ -112,7 +112,8 @@ static const unsigned char c_cc[] PROGMEM = {4, 0x41, 0x41, 0x36, 0x08};
 static const unsigned char c_tl[] PROGMEM = {5, 0x10, 0x08, 0x08, 0x08, 0x04};
 
 /* Pointers to characters */
-static const unsigned char *char_table[] = { 
+const unsigned char * const char_table[] PROGMEM = { 
+//static const unsigned char * char_table[] = {
     c_sp, c_ex, c_qt, c_ha, c_dl, c_pc, c_am, c_ap, c_op, c_cp, c_as, c_pl, 
     c_cm, c_da, c_pr, c_fs, c_0,  c_1,  c_2,  c_3,  c_4,  c_5,  c_6,  c_7,  
     c_8,  c_9,  c_co, c_sc, c_lt, c_eq, c_gt, c_qm, c_at, c_A,  c_B,  c_C,  
@@ -121,7 +122,7 @@ static const unsigned char *char_table[] = {
     c_bs, c_cb, c_ct, c_us, c_ga, c_a,  c_b,  c_c,  c_d,  c_e,  c_f,  c_g,
     c_h,  c_i,  c_j,  c_k,  c_l,  c_m,  c_n,  c_o,  c_p,  c_q,  c_r,  c_s,
     c_t,  c_u,  c_v,  c_w,  c_x,  c_y,  c_z,  c_oc, c_vb, c_cc, c_tl 
-    };
+};
 
 
 #endif // LED_Font_1_H

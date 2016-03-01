@@ -44,7 +44,6 @@ Distributed as-is; no warranty is given.
 #include <SparkFun_LED_8x7.h>
 #include <Chaplex.h>
 
-// Global variables
 byte led_pins[] = {2, 3, 4, 5, 6, 7, 8, 9}; // Pins for LEDs
 byte i;
 byte x;
@@ -58,15 +57,12 @@ const byte sparkfun_logo[] = { 0,0,0,0,1,0,0,0,
                                0,0,1,1,0,0,0,0,
                                0,0,1,0,0,0,0,0 };
 
-// Setup code - this runs once
 void setup() {
-  
-  // Initialize the serial port
   Serial.begin(9600);
-  Serial.println("-----------------------");
-  Serial.println("SparkFun LED 8x7 - Demo");
-  Serial.println("-----------------------");
-  
+  Serial.println(F("-----------------------"));
+  Serial.println(F("SparkFun LED 8x7 - Demo"));
+  Serial.println(F("-----------------------"));
+
   // Initialize and clear display
   Plex.init(led_pins);
   Plex.clear();
@@ -74,25 +70,25 @@ void setup() {
   
   // Seed our random number generator with an analog voltage read
   randomSeed(analogRead(0));
+
 }
 
-// Loop code - this runs for infinity
 void loop() {
 
   // Show a bitmap
-  Serial.println("Draw a bitmap");
+  Serial.println(F("Draw a bitmap"));
   Plex.clear();
   Plex.drawBitmap(sparkfun_logo);
   Plex.display();
   delay(2000);
   
   // Scroll some text
-  Serial.println("Scroll some text");
+  Serial.println(F("Scroll some text"));
   Plex.scrollText("Badges?", 1);
   delay(6000);
-  
+
   // Explosions!
-  Serial.println("Display an animation");
+  Serial.println(F("Display an animation"));
   for ( i = 0; i < 15; i++ ) {
     x = random(0, 8);
     y = random(0, 7);
