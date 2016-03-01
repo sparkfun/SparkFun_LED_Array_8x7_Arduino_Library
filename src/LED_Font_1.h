@@ -113,7 +113,6 @@ static const unsigned char c_tl[] PROGMEM = {5, 0x10, 0x08, 0x08, 0x08, 0x04};
 
 /* Pointers to characters */
 const unsigned char * const char_table[] PROGMEM = { 
-//static const unsigned char * char_table[] = {
     c_sp, c_ex, c_qt, c_ha, c_dl, c_pc, c_am, c_ap, c_op, c_cp, c_as, c_pl, 
     c_cm, c_da, c_pr, c_fs, c_0,  c_1,  c_2,  c_3,  c_4,  c_5,  c_6,  c_7,  
     c_8,  c_9,  c_co, c_sc, c_lt, c_eq, c_gt, c_qm, c_at, c_A,  c_B,  c_C,  

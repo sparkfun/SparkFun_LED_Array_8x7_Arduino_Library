@@ -364,11 +364,6 @@ void SparkFun_LED_8x7::circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
     
     for ( i = y0 - radius; i <= y0 + radius; i++ ) {
         pixel(x0, i);
-        Serial.print("Drawing (");
-        Serial.print(x0);
-        Serial.print(",");
-        Serial.print(i);
-        Serial.println(")");
     }
     
     while ( x < y ) {
@@ -584,6 +579,18 @@ uint8_t SparkFun_LED_8x7::getArrayHeight()
 unsigned char SparkFun_LED_8x7::getPGMFontByte(int idx, int offset /* = 0 */)
 {
     return pgm_read_byte(pgm_read_word(&char_table[idx]) + offset);
+}
+
+/**
+ * @brief Swaps the given bytes
+ *
+ * @param[in, out] a first byte (becomes b)
+ * @param[in, out] b second byte (becomes a)
+ */
+void SparkFun_LED_8x7::swap(uint8_t &a, uint8_t &b) {
+    uint8_t t = a;
+    a = b;
+    b = t;
 }
 
 #if defined __AVR_ATmega168__ || \

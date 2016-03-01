@@ -24,26 +24,22 @@
 
 #include "LED_Font_1.h"
 
-/* Macros */
-#define swap(a, b) { uint8_t t = a; a = b; b = t; }
-
 /* Debug */
 #define LED_8X7_DEBUG   0
 
 /* Constants */
-#define NUM_CHAPLEX_PINS    8       // Number of pins   
+static const unsigned int NUM_CHAPLEX_PINS = 8; // Number of pins  
+static const unsigned int DEFAULT_SHIFT_DELAY = 50; // Ticks before scrolling
+static const unsigned int MAX_CHARS = 100;      // Maximum characters to scroll
+static const unsigned int CHAR_OFFSET = 0x20;   // Starting place for ASCII
+static const unsigned int CHAR_SPACE = 1;       // Number columns between chars
+static const unsigned int END_SPACE = 8;        // Number columns after text
+static const unsigned int COL_SIZE = 7;         // Number LEDs in a column
+static const unsigned int ROW_SIZE = 8;         // Number LEDs in a row
 
-//Set shift delay
-#define DEFAULT_SHIFT_DELAY 50		// Number of ticks to wait before scrolling
-
-#define MAX_CHARS           100     // Maximum characters to scroll
-#define CHAR_OFFSET         0x20    // Starting place for ASCII characters
-#define CHAR_SPACE          1       // Number of blank columns between chars
-#define END_SPACE           8       // Number of blank columns after text
-#define COL_SIZE            7       // Number of LEDs in a single column
-#define ROW_SIZE            8       // Number of LEDs in a single row
-#define NUM_LEDS            COL_SIZE * ROW_SIZE
-#define ALL_BUT_LAST_COL    NUM_LEDS - COL_SIZE
+/* Derived constants */
+static const unsigned int NUM_LEDS = COL_SIZE * ROW_SIZE;
+static const unsigned int ALL_BUT_LAST_COL = NUM_LEDS - COL_SIZE;
 
 /* Global variables */
 ISR(TIMER2_OVF_vect);
@@ -83,8 +79,9 @@ public:
 
 private:
 
-    /* Helper function to read bytes from an array in PROGMEM */
+    /* Helper functions */
     unsigned char getPGMFontByte(int idx, int offset = 0);
+    void swap(uint8_t &a, uint8_t &b);
 
     /* Interrupt service routine that is called by the system's ISR */
     inline void isr();

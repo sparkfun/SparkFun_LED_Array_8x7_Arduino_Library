@@ -9,19 +9,19 @@ Scrolls text across the LED array for 10 seconds.
 
 Hardware Connections:
 
-IMPORTANT:  The Charlieplex LED board is designed for 2.0 - 3.3V!
+IMPORTANT:  The Charlieplex LED board is designed for 2.0 - 5.2V!
             Higher voltages can damage the LEDs.
 
  Arduino Pin | Charlieplex Board
  ------------|------------------
-      2      |         2
-      3      |         3
-      4      |         4
-      5      |         5
-      6      |         6
-      7      |         7
-      8      |         8
-      9      |         9
+      2      |         A
+      3      |         B
+      4      |         C
+      5      |         D
+      6      |         E
+      7      |         F
+      8      |         G
+      9      |         H
 
 Resources:
 Include Chaplex.h, SparkFun_LED_8x7.h
@@ -29,7 +29,7 @@ The Chaplex library can be found at:
 http://playground.arduino.cc/Code/Chaplex
 
 Development environment specifics:
-Written in Arduino 1.0.6
+Written in Arduino 1.6.7
 Tested with SparkFun BadgerStick (Interactive Badge)
 
 This code is beerware; if you see me (or any other SparkFun 

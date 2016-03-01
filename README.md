@@ -1,18 +1,20 @@
-SparkFun Badger Array Arduino Library
+SparkFun LED Array - 8x7 Arduino Library
 ===============================================
 
-Arduino Library for the charlieplexed 8x7 LED Badger Array. 
+![SparkFun BME280 Breakout](https://cdn.sparkfun.com/r/188-188/assets/parts/1/1/3/6/9/13795-01.jpg)
 
-Please check out the [BadgerHack Tutorial](http://sfe.io/t349) for more information. 
-The accompanying badges' information can be found [here](https://github.com/sparkfun/Interactive_Badges/tree/sxsw2015).
-The BadgerHack Demos are available [here](https://github.com/sparkfun/BadgerHack_Demos).
+[*SparkFun LED Array - 8x7*](https://www.sparkfun.com/products/13795)
 
+Arduino Library for the charlieplexed 8x7 LED Array. 
+
+To use the LED array with any 328-based Arduino, see the [SparkFun LED Array (8x7) Hookup Guide](https://learn.sparkfun.com/tutorials/sparkfun-led-array-8x7-hookup-guide).
+
+The LED array also comes with the BadgerHack badges. Please check out the [BadgerHack Tutorial](http://sfe.io/t349) for more information. The BadgerHack Demos are available [here](https://github.com/sparkfun/BadgerHack_Demos).
 
 Repository Contents
 -------------------
 
 * **/examples** - Example sketches for the library (.ino). Run these from the Arduino IDE. 
-* **/extras** - Additional documentation for the user. These files are ignored by the IDE. 
 * **/src** - Source files for the library (.cpp, .h).
 * **keywords.txt** - Keywords from this library that will be highlighted in the Arduino IDE. 
 * **library.properties** - General library properties for the Arduino package manager. 
@@ -28,6 +30,7 @@ https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/commits/maste
 
 GitHub Version History
 ---------------
+* [V1.3.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.3.0) - Changed macro to real function and changed #define constants to static const global variables.
 * [V1.2.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.2.0) - Refresh rate based off frequency. Only works with ATmega 168/328-based Arduinos.
 * [V1.1.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.1.0) - The library has been updated to be compliant with the RedStick.
 * [V1.0.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.0.0) - This is the original BadgerStick release.
@@ -37,9 +40,9 @@ License Information
 
 This product is _**open source**_! 
 
-The **code** is beerware; if you see me (or any other SparkFun employee) at the local, and you've found our code helpful, please buy us a round!
+Please review the LICENSE.md file for license information. 
 
-Please use, reuse, and modify these files as you see fit. Please maintain attribution to SparkFun Electronics and release anything derivative under the same license.
+If you have any questions or concerns on licensing, please contact techsupport@sparkfun.com.
 
 Distributed as-is; no warranty is given.
 
