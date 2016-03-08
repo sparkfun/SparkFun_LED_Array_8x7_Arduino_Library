@@ -77,7 +77,8 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
     defined __AVR_ATmega328P__
 
     /* If we are scrolling, stop and delete our string buffer */
-    if ( scrolling_ ) {
+    if ( scrolling_ ) 
+    {
         stopScrolling();
     }
 
@@ -91,7 +92,8 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
     /* Print out the pins we are using */
 # if LED_8X7_DEBUG
     Serial.print(F("Using pins: "));
-    for ( int i = 0; i < NUM_CHAPLEX_PINS; i++ ) {
+    for ( int i = 0; i < NUM_CHAPLEX_PINS; i++ ) 
+    {
         Serial.print(pins[i]);
         Serial.print(" ");
     }
@@ -99,7 +101,8 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
 # endif
 
     /* If we alread have a Chaplex object, delete it */
-    if ( chaplex_ != NULL ) {
+    if ( chaplex_ != NULL ) 
+    {
         delete chaplex_;
     }
     
@@ -137,7 +140,8 @@ bool SparkFun_LED_8x7::init(byte pins[NUM_CHAPLEX_PINS])
  */
 void SparkFun_LED_8x7::display()
 {
-    for ( byte i = 0; i < NUM_LEDS; i++ ) {
+    for ( byte i = 0; i < NUM_LEDS; i++ ) 
+    {
         chaplex_->ledWrite(charlie_leds_[i], frame_buffer_[i]);
     }
 }
@@ -162,16 +166,20 @@ void SparkFun_LED_8x7::clear()
 void SparkFun_LED_8x7::pixel(uint8_t x, uint8_t y, uint8_t on /* = 1 */)
 {
     /* Check to make sure that we are not accessing outside the array */
-    if ( x >= ROW_SIZE || y >= COL_SIZE ) {
+    if ( x >= ROW_SIZE || y >= COL_SIZE ) 
+    {
         return;
     }
     
     /* Turn the specified LED on or off. Note that we need to switch our X and Y
      * for the user, as X goes down and Y goes across on the actual LED display.
      */
-    if ( on ) {
+    if ( on ) 
+    {
         frame_buffer_[(x * COL_SIZE) + y] = 1;
-    } else {
+    }
+    else 
+    {
         frame_buffer_[(x * COL_SIZE) + y] = 0;
     }
 }
@@ -196,13 +204,15 @@ void SparkFun_LED_8x7::line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
     
     /* Determine if we need to increment in x or y direction */
     steep = (abs(y1 - y0) > abs(x1 - x0)) ? 1 : 0;
-    if ( steep ) {
+    if ( steep ) 
+    {
         swap(x0, y0);
         swap(x1, y1);
     }
     
     /* Make sure we always increment up */
-    if ( x0 > x1 ) {
+    if ( x0 > x1 ) 
+    {
         swap(x0, x1);
         swap(y0, y1);
     }
@@ -215,7 +225,8 @@ void SparkFun_LED_8x7::line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
     err = dx >> 1;      // Divide by 2
     
     /* Determine our y step depending on rise or fall direction */
-    if ( y0 < y1 ) {
+    if ( y0 < y1 ) 
+    {
         y_step = 1;
     } else {
         y_step = -1;
@@ -223,14 +234,19 @@ void SparkFun_LED_8x7::line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
     
     /* Step through the line, turning on pixels */
     y = y0;
-    for ( x = x0; x <= x1; x++ ) {
-        if ( steep ) {
+    for ( x = x0; x <= x1; x++ ) 
+    {
+        if ( steep ) 
+        {
             pixel(y, x);
-        } else {
+        } 
+        else 
+        {
             pixel(x, y);
         }
         err -= dy;
-        if ( err < 0 ) {
+        if ( err < 0 ) 
+        {
             y += y_step;
             err += dx;
         }
@@ -248,7 +264,8 @@ void SparkFun_LED_8x7::line(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
 void SparkFun_LED_8x7::rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height)
 {
     /* We can't have a width or height of 0; there would be no rectangle */
-    if ( width == 0 || height == 0 ) {
+    if ( width == 0 || height == 0 ) 
+    {
         return;
     }
 
@@ -257,7 +274,8 @@ void SparkFun_LED_8x7::rect(uint8_t x, uint8_t y, uint8_t width, uint8_t height)
     line(x, y + height - 1, x + width - 1, y + height - 1);
     
     /* Don't draw vertical lines if the rectangle is height 2 or less */
-    if ( height <= 2 ) {
+    if ( height <= 2 ) 
+    {
         return;
     }
     
@@ -282,12 +300,14 @@ void SparkFun_LED_8x7::rectFill(uint8_t x,
     int i;
     
     /* We can't have a width or height of 0; there would be no rectangle */
-    if ( width == 0 || height == 0 ) {
+    if ( width == 0 || height == 0 ) 
+    {
         return;
     }
     
     /* Make a filled rectangle with a  bunch of horizontal lines */
-    for ( i = y; i < y + height; i++ ) {
+    for ( i = y; i < y + height; i++ ) 
+    {
         line(x, i, x + width - 1, i);
     }
 }        
@@ -318,8 +338,10 @@ void SparkFun_LED_8x7::circle(uint8_t x0, uint8_t y0, uint8_t radius)
     pixel(x0 + radius, y0);
     pixel(x0 - radius, y0);
     
-    while ( x < y ) {
-        if ( f >= 0 ) {
+    while ( x < y ) 
+    {
+        if ( f >= 0 ) 
+        {
             y--;
             ddF_y += 2;
             f += ddF_y;
@@ -362,12 +384,15 @@ void SparkFun_LED_8x7::circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
     x = 0;
     y = radius;
     
-    for ( i = y0 - radius; i <= y0 + radius; i++ ) {
+    for ( i = y0 - radius; i <= y0 + radius; i++ ) 
+    {
         pixel(x0, i);
     }
     
-    while ( x < y ) {
-        if ( f >= 0 ) {
+    while ( x < y ) 
+    {
+        if ( f >= 0 ) 
+        {
             y--;
             ddF_y += 2;
             f += ddF_y;
@@ -376,12 +401,14 @@ void SparkFun_LED_8x7::circleFill(uint8_t x0, uint8_t y0, uint8_t radius)
         ddF_x += 2;
         f += ddF_x;
         
-        for ( i = y0 - y; i <= y0 + y; i++ ) {
+        for ( i = y0 - y; i <= y0 + y; i++ ) 
+        {
             pixel(x0 + x, i);
             pixel(x0 - x, i);
         }
         
-        for ( i = y0 - x; i <= y0 + x; i++ ) {
+        for ( i = y0 - x; i <= y0 + x; i++ ) 
+        {
             pixel(x0 + y, i);
             pixel(x0 - y, i);
         }
@@ -399,8 +426,10 @@ void SparkFun_LED_8x7::drawBitmap(const byte bitmap[NUM_LEDS])
     uint8_t y;
     
     /* Transpose matrix 90 degrees (switch x and y) */
-    for ( x = 0; x < ROW_SIZE; x++ ) {
-        for ( y = 0; y < COL_SIZE; y++ ) {
+    for ( x = 0; x < ROW_SIZE; x++ ) 
+    {
+        for ( y = 0; y < COL_SIZE; y++ ) 
+        {
             frame_buffer_[(x * COL_SIZE) + y] = 
                 (bitmap[(y * ROW_SIZE) + x] ? 1: 0);
         }
@@ -435,7 +464,8 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
     uint8_t char_size;
 
     /* If we are scrolling, stop and delete our string buffer */
-    if ( scrolling_ ) {
+    if ( scrolling_ ) 
+    {
         stopScrolling();
     }
     
@@ -447,7 +477,8 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
     
     /* Calculate characters in the string */
     text_len = strlen(in_string);
-    if ( text_len > MAX_CHARS ) {
+    if ( text_len > MAX_CHARS ) 
+    {
         text_len = MAX_CHARS;
     }
 #if LED_8X7_DEBUG
@@ -462,13 +493,15 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
     Serial.print(F("Dictionary size: "));
     Serial.println(dict_size, DEC);
 #endif
-    for ( i = 0; i < text_len; i++ ) {
+    for ( i = 0; i < text_len; i++ ) 
+    {
         
         /* Find where in the dictionary the character occurs */
         char_ind = in_string[i] - CHAR_OFFSET;
         
         /* If character is not in the dictionary, don't count it */
-        if ( char_ind < 0 || char_ind >= dict_size ) {
+        if ( char_ind < 0 || char_ind >= dict_size ) 
+        {
             continue;
         }
 
@@ -485,39 +518,45 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
     /* Create buffer */
     buf_ind = 0;
     scroll_buf_ = (byte*)malloc(scroll_len_ * sizeof(byte));
-    for ( i = 0; i < text_len; i++ ) {
+    for ( i = 0; i < text_len; i++ ) 
+    {
         
         /* Find where in the diction the character occurs */
         char_ind = in_string[i] - CHAR_OFFSET;
         
         /* If character is not in the dictionary, skip it */
-        if ( char_ind < 0 || char_ind >= dict_size ) {
+        if ( char_ind < 0 || char_ind >= dict_size ) 
+        {
             continue;
         }
         
         /* For that character, load in the definition (bytes show which LEDs) */
         char_size = getPGMFontByte(char_ind);
-        for ( j = 1; j < char_size + 1; j++ ) {
+        for ( j = 1; j < char_size + 1; j++ ) 
+        {
             scroll_buf_[buf_ind] = getPGMFontByte(char_ind, j);
             buf_ind++;
         }
         
         /* Add in spaces after each char */
-        for ( j = 0; j < CHAR_SPACE; j++ ) {
+        for ( j = 0; j < CHAR_SPACE; j++ ) 
+        {
             scroll_buf_[buf_ind] = 0;
             buf_ind++;
         }
     }
     
     /* Add in spaces after text */
-    for ( i = 0; i < END_SPACE; i++ ) {
+    for ( i = 0; i < END_SPACE; i++ ) 
+    {
         scroll_buf_[buf_ind] = 0;
         buf_ind++;
     }
     
     /* Print buffer */
 #if 0
-    for ( i = 0; i < scroll_len_; i++ ) {
+    for ( i = 0; i < scroll_len_; i++ ) 
+    {
         Serial.println(scroll_buf_[i], HEX);
     }
 #endif
@@ -526,8 +565,10 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
     scrolling_ = 1;
     
     /* If we are blocking, stop execution until scrolling is done */
-    if ( blocking ) {
-        while ( scrolling_ ) {
+    if ( blocking ) 
+    {
+        while ( scrolling_ ) 
+        {
 #if 0
             Serial.println("Waiting...");
 #endif
@@ -541,7 +582,8 @@ void SparkFun_LED_8x7::scrollText(char *in_string, int times, bool blocking)
 void SparkFun_LED_8x7::stopScrolling()
 {
     scrolling_ = 0;
-    if ( scroll_buf_ != NULL ) {
+    if ( scroll_buf_ != NULL ) 
+    {
         free(scroll_buf_);
         scroll_buf_ = NULL;
     }
@@ -587,7 +629,8 @@ unsigned char SparkFun_LED_8x7::getPGMFontByte(int idx, int offset /* = 0 */)
  * @param[in, out] a first byte (becomes b)
  * @param[in, out] b second byte (becomes a)
  */
-void SparkFun_LED_8x7::swap(uint8_t &a, uint8_t &b) {
+void SparkFun_LED_8x7::swap(uint8_t &a, uint8_t &b) 
+{
     uint8_t t = a;
     a = b;
     b = t;
@@ -604,20 +647,24 @@ void SparkFun_LED_8x7::isr()
     TIMSK2 &= ~(1 << TOIE2);
 
     /* Shift one column */
-    if ( scrolling_ ) {
+    if ( scrolling_ ) 
+    {
         shift_count_++;
-        if ( shift_count_ >= shift_delay_ ) {
+        if ( shift_count_ >= shift_delay_ ) 
+        {
             shift_count_ = 0;
             byte i;
             byte bit_to_shift;
             
             /* Shift all but last column */
-            for ( i = 0; i < ALL_BUT_LAST_COL; i++ ) {
+            for ( i = 0; i < ALL_BUT_LAST_COL; i++ ) 
+            {
                 frame_buffer_[i] = frame_buffer_[i + COL_SIZE];
             }
             
             /* Shift in new column at the end */
-            for ( i = 0; i < COL_SIZE; i++ ) {
+            for ( i = 0; i < COL_SIZE; i++ ) 
+            {
                 bit_to_shift = (scroll_buf_[scroll_index_] >> i) & 0x01;
                 frame_buffer_[ALL_BUT_LAST_COL + i] = bit_to_shift;
             }
@@ -627,11 +674,14 @@ void SparkFun_LED_8x7::isr()
             
             /* Increment buffer index and reset if it reaches the end */
             scroll_index_++;
-            if ( scroll_index_ >= scroll_len_ ) {
+            if ( scroll_index_ >= scroll_len_ ) 
+            {
                 scroll_index_ = 0;
-                if ( scroll_times_ > 0 ) {
+                if ( scroll_times_ > 0 ) 
+                {
                     scroll_count_++;
-                    if ( scroll_count_ >= scroll_times_ ) {
+                    if ( scroll_count_ >= scroll_times_ ) 
+                    {
                         stopScrolling();
                     }
                 }
@@ -652,7 +702,8 @@ void SparkFun_LED_8x7::isr()
  * SparkFun_LED_8x7 class. To do this, we instantiate a SparkFun_LED_8x7 object
  * (globally) in the .cpp file.
  **/
-ISR(TIMER2_OVF_vect) {
+ISR(TIMER2_OVF_vect) 
+{
     Plex.isr();
 }
 

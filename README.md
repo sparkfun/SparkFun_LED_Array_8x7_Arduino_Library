@@ -7,9 +7,9 @@ SparkFun LED Array - 8x7 Arduino Library
 
 Arduino Library for the charlieplexed 8x7 LED Array. 
 
-To use the LED array with any 328-based Arduino, see the [SparkFun LED Array (8x7) Hookup Guide](https://learn.sparkfun.com/tutorials/sparkfun-led-array-8x7-hookup-guide).
+To use the LED array with any ATmega 168 or 328-based Arduino, see the [SparkFun LED Array (8x7) Hookup Guide](https://learn.sparkfun.com/tutorials/sparkfun-led-array-8x7-hookup-guide).
 
-A version of the LED array (called the "BadgerArray") also comes with the BadgerHack badges. Please check out the [BadgerHack Tutorial](http://sfe.io/t349) for more information. The BadgerHack Demos are available [here](https://github.com/sparkfun/BadgerHack_Demos).
+A version of the LED array (called the "BadgerArray") also comes with the BadgerHack badges. Please check out the [BadgerHack Tutorial](https://learn.sparkfun.com/tutorials/badgerhack) for more information. The BadgerHack Demos are available [here](https://github.com/sparkfun/BadgerHack_Demos).
 
 Repository Contents
 -------------------
@@ -27,6 +27,7 @@ Documentation
 
 GitHub Version History
 ---------------
+* [V1.3.1](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.3.0) - Updated example licenses to MIT and moved curly braces to match SparkFun's coding standards
 * [V1.3.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.3.0) - Changed macro to real function and changed #define constants to static const global variables.
 * [V1.2.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.2.0) - Refresh rate based off frequency. Only works with ATmega 168/328-based Arduinos.
 * [V1.1.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.1.0) - The library has been updated to be compliant with the RedStick.

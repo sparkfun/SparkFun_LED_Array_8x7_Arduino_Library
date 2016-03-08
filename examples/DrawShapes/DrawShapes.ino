@@ -30,11 +30,12 @@ http://playground.arduino.cc/Code/Chaplex
 
 Development environment specifics:
 Written in Arduino 1.6.7
-Tested with SparkFun BadgerStick (Interactive Badge)
+Tested with SparkFun RedBoard and BadgerStick (Interactive Badge)
 
-This code is beerware; if you see me (or any other SparkFun 
-employee) at the local, and you've found our code helpful, please
-buy us a round!
+This code is released under the [MIT License](http://opensource.org/licenses/MIT).
+
+Please review the LICENSE.md file included with this example. If you have any questions 
+or concerns with licensing, please contact techsupport@sparkfun.com.
 
 Distributed as-is; no warranty is given.
 ****************************************************************/
