@@ -27,7 +27,7 @@ Documentation
 
 GitHub Version History
 ---------------
-* [V1.3.1](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.3.0) - Updated example licenses to MIT and moved curly braces to match SparkFun's coding standards
+* [V1.3.1](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.3.1) - Updated example licenses to MIT and moved curly braces to match SparkFun's coding standards
 * [V1.3.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.3.0) - Changed macro to real function and changed #define constants to static const global variables.
 * [V1.2.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.2.0) - Refresh rate based off frequency. Only works with ATmega 168/328-based Arduinos.
 * [V1.1.0](https://github.com/sparkfun/SparkFun_LED_Array_8x7_Arduino_Library/tree/V_1.1.0) - The library has been updated to be compliant with the RedStick.
