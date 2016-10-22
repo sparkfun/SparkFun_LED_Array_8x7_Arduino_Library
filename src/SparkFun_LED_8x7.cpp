@@ -18,7 +18,7 @@
  
 #include <Arduino.h>
 
-#include "SparkFun_LED_8x7_atascii.h"
+#include "SparkFun_LED_8x7.h"
 
 /* We need to create a global instance so that the ISR knows what to talk to */
 SparkFun_LED_8x7 Plex;

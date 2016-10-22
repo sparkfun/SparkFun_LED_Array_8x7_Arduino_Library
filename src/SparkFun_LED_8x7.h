@@ -24,7 +24,7 @@
 
 /* #include "LED_Font_1.h"
 */
-#include "LED_Font_atascii8.h"
+#include "LED_Font_atascii_variable.h"
 
 /* Debug */
 #define LED_8X7_DEBUG   0
