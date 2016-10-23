@@ -1,3 +1,11 @@
+// PICK YOUR FONT HERE ...
+// uncomment the font your want and comment out the others
+#define FONT "LED_Font_atascii_variable.h"
+//#define FONT "LED_Font_atascii8.h"
+//#define FONT "LED_Font_1.h"
+
+
+
 /**
  * @file    SparkFun_LED_8x7.h
  * @brief   Library for the SparkFun 8x7 Charlieplex LED Array
@@ -15,6 +23,7 @@
  *
  * Relies on the Chaplex library written by Stefan Götze.
  */
+
  
 #ifndef SparkFun_LED_8x7_H
 #define SparkFun_LED_8x7_H
@@ -24,7 +33,7 @@
 
 /* #include "LED_Font_1.h"
 */
-#include "LED_Font_atascii_variable.h"
+#include FONT
 
 /* Debug */
 #define LED_8X7_DEBUG   0
